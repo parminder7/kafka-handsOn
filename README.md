@@ -124,27 +124,6 @@ Note that under the Kafka node's logs path, two partition has been created `test
 
 <img width="1002" alt="screen shot 2018-03-22 at 6 52 12 pm" src="https://media.github.ibm.com/user/54527/files/5875587e-2e02-11e8-8a2d-d1c148385728">
 
-
-- Get the list of topics on Kafka cluster.
-
-```sh
-./bin/kafka-topics.sh --list --zookeeper 9.30.42.237:2181 9.30.118.10:2181
-
-test-topic
-```
-
-- Describe `test-topic` topic.
-
-<img width="1153" alt="screen shot 2018-03-22 at 7 16 24 pm" src="https://media.github.ibm.com/user/54527/files/ac64bbe8-2e05-11e8-95ae-41e38fb7f4b9">
-
-<img width="1149" alt="screen shot 2018-03-22 at 7 19 10 pm" src="https://media.github.ibm.com/user/54527/files/f04a8d60-2e05-11e8-921b-3cf4c6d4dde2">
-
-```sh
-Topic: test-topic	Partition: 0	Leader: 1	Replicas: 1,0	Isr: 1
-``` 
-
-represents Kafka broker with id `0` acting as leader and handling all reads/writes for partition `0`. `Replicas: 1,0` meaning partition `0` is replicated on broker id 0 and 1.   
-
 - Push a topic within Kafka cluster (containing two Kafka servers) with two partitions and no replication. 
 
 ```sh
@@ -162,6 +141,28 @@ On Kafka node #1:
 On Kafka node #2:
 
 <img width="890" alt="screen shot 2018-03-22 at 7 02 45 pm" src="https://media.github.ibm.com/user/54527/files/e0da810c-2e03-11e8-9897-fb168af0496c">
+
+
+- Get the list of topics on Kafka cluster.
+
+```sh
+./bin/kafka-topics.sh --list --zookeeper 9.30.42.237:2181 9.30.118.10:2181
+
+test-topic
+non-repeat-topic
+```
+
+- Describe `test-topic` topic.
+
+<img width="1153" alt="screen shot 2018-03-22 at 7 16 24 pm" src="https://media.github.ibm.com/user/54527/files/ac64bbe8-2e05-11e8-95ae-41e38fb7f4b9">
+
+<img width="1149" alt="screen shot 2018-03-22 at 7 19 10 pm" src="https://media.github.ibm.com/user/54527/files/f04a8d60-2e05-11e8-921b-3cf4c6d4dde2">
+
+```sh
+Topic: test-topic	Partition: 0	Leader: 1	Replicas: 1,0	Isr: 1
+``` 
+
+represents Kafka broker with id `0` acting as leader and handling all reads/writes for partition `0`. `Replicas: 1,0` meaning partition `0` is replicated on broker id 0 and 1.   
 
 - Run a producer process to publish data into `test-topic` Kafka topic within the Kafka broker.
 
