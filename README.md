@@ -89,7 +89,9 @@ server.125=0.0.0.0:2888:3888
 ```
 
 `123` and `125` are unique identifier provided in `dataDir/myid` file on each nodes.
+
 `myid` file consists of a single line containing id of node.
+
 `2888` this is the port used by followers to connect to leader and `3888` is for leader election.
 
 
