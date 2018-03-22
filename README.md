@@ -112,5 +112,12 @@ server.125=0.0.0.0:2888:3888
 
 ## Testing
 
+- Push a topic within Kafka cluster (containing two Kafka servers) with two partitions and replicate partition over two Kafka broker. 
+
+```sh
+./bin/kafka-topics.sh --create --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --topic test-topic --partitions 2 --replication-factor 2
+
+Created topic "test-topic".
+```
 
 
