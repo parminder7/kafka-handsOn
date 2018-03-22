@@ -92,7 +92,7 @@ server.125=0.0.0.0:2888:3888
 
 `myid` file consists of a single line containing id of node.
 
-`2888` this is the port used by followers to connect to leader and `3888` is for leader election.
+`2888` this is the port used by followers to connect to leader and `3888` is for leader election. (Make sure these ports are open on nodes)
 
 
 
