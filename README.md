@@ -152,7 +152,7 @@ test-topic
 non-repeat-topic
 ```
 
-- Describe `test-topic` topic.
+- Describe `test-topic` and `non-repeat-topic` topics.
 
 <img width="1153" alt="screen shot 2018-03-22 at 7 16 24 pm" src="https://media.github.ibm.com/user/54527/files/ac64bbe8-2e05-11e8-95ae-41e38fb7f4b9">
 
