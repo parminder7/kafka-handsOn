@@ -1,12 +1,27 @@
-# Set up a complete Kafka environment
+# Table of content
+
+
+- [Set up Kafka environment](https://github.com/parminder7/kafka-sample/blob/master/README.md#set-up-a-complete-kafka-environment)
+
+	- [Pre-requisite](https://github.com/parminder7/kafka-sample#pre-requisite)
+	- [Step #1: Install JAVA on all machines](https://github.com/parminder7/kafka-sample#step-1-install-java-on-all-machines)
+	- [Step #2: Install Kafka](https://github.com/parminder7/kafka-sample#step-2-install-kafka)
+	- [Step #3: Configure Kafka nodes](https://github.com/parminder7/kafka-sample#step-3-configure-kafka-nodes)
+	- [Step #4: Configure Kafka Zookeeper node](https://github.com/parminder7/kafka-sample#step-4-configure-kafka-zookeeper-nodes)
+	
+- [Testing]()
+
+
+
+## Set up a complete Kafka environment
 
 Here, we have provisioned two kafka nodes with two zookeeper nodes. 
 
-## Pre-requisite
+### Pre-requisite
 
 - Create 4 linux based VM/machines. (Ubuntu 17.10, CPU 4 Core, Memory 8GB, Disk 250GB) 
 
-## Step #1: Install JAVA on all machines
+### Step #1: Install JAVA on all machines
 
 Followed below steps to install Java on unbutu:
 
@@ -24,7 +39,7 @@ export JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk
 export JRE_HOME=/usr/lib/jvm/jre
 ```
 
-## Step #2: Install Kafka 
+### Step #2: Install Kafka 
 
 Installing kafka is very simple. One can check the latest release [here](https://kafka.apache.org/downloads).
 
@@ -42,7 +57,7 @@ tar -xvzf kafka_2.12-1.0.1.tgz
 
 - Explore the extracted folder. You will see `bin` and `config` folders. These are important folders as you will be working with those in next steps.
 
-## Step #3: Configure Kafka nodes
+### Step #3: Configure Kafka nodes
 
 After downloading Kafka, the next step is to change/update some configuration on Kafka.
 
@@ -61,7 +76,7 @@ mkdir /tmp/kafka-logs-0
 drwxr-xr-x  2 root root 4096 Mar 19 17:17 kafka-logs-0
 ```
 
-## Step #4: Configure Kafka Zookeeper nodes
+### Step #4: Configure Kafka Zookeeper nodes
 
 In this step, we will be configuring zookeeper nodes. Zookeeper is a high avalibilty coordination service that Kafka uses for coordination among brokers.
 
@@ -95,7 +110,7 @@ server.125=0.0.0.0:2888:3888
 `2888` this is the port used by followers to connect to leader and `3888` is for leader election. (Make sure these ports are open on nodes)
 
 
-
+## Testing
 
 
 
