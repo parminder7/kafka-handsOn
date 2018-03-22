@@ -46,13 +46,54 @@ tar -xvzf kafka_2.12-1.0.1.tgz
 
 After downloading Kafka, the next step is to change/update some configuration on Kafka.
 
-- Edit `/kafka_2.12-1.0.1/config/server.properties`
+- Edit `/kafka_2.12-1.0.1/config/server.properties` file. Provide IPs of zookeeper server (don't worry, we'll be configuring zookeeper in later steps), log output path and broker identifier (remember, it should be unique id for each kafka server).
 
 ```sh
 	zookeeper.connect=9.30.42.237:2181,9.30.118.104:2181
 	log.dirs=/tmp/kafka-logs-0
 	broker.id=0
 ```
+
+- Make sure that log output path already exist on nodes with right execution permissions.
+
+```sh
+mkdir /tmp/kafka-logs-0
+drwxr-xr-x  2 root root 4096 Mar 19 17:17 kafka-logs-0
+```
+
+## Step #4: Configure Kafka Zookeeper nodes
+
+In this step, we will be configuring zookeeper nodes. Zookeeper is a high avalibilty coordination service that Kafka uses for coordination among brokers.
+
+I followed the information provided in the apache zookeeper [doc](https://zookeeper.apache.org/doc/r3.4.10/zookeeperAdmin.html#sc_zkMulitServerSetup).
+
+- Edit `/kafka_2.12-1.0.1/config/zookeeper.properties` file. Provide data directory path. Make sure `dataDir` file exists on the nodes.
+
+```sh 
+dataDir=/tmp/zookeeper-0
+# the port at which the clients will connect
+clientPort=2181
+# disable the per-ip limit on the number of connections since this is a non-production config
+maxClientCnxns=0
+initLimit=5
+syncLimit=2
+server.123=9.30.118.104:2888:3888
+server.125=0.0.0.0:2888:3888
+```
+
+To let every zookeeper know about every other nodes in ensemble, we need to provide IDs, IPs and ports as follows.
+
+```sh
+server.123=9.30.118.104:2888:3888
+server.125=0.0.0.0:2888:3888
+```
+
+`123` and `125` are unique identifier provided in `dataDir/myid` file on each nodes.
+`myid` file consists of a single line containing id of node.
+`2888` this is the port used by followers to connect to leader and `3888` is for leader election.
+
+
+
 
 
 
