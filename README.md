@@ -120,4 +120,16 @@ server.125=0.0.0.0:2888:3888
 Created topic "test-topic".
 ```
 
+Note that under the Kafka node's logs path, two partition has been created `test-topic-0` & `test-topic-1` on both nodes.
+
+<img width="1002" alt="screen shot 2018-03-22 at 6 52 12 pm" src="https://media.github.ibm.com/user/54527/files/5875587e-2e02-11e8-8a2d-d1c148385728">
+
+
+- Get the list of topics on Kafka cluster.
+
+```sh
+./bin/kafka-topics.sh --list --zookeeper 9.30.42.237:2181 9.30.118.10:2181
+
+test-topic
+```
 
