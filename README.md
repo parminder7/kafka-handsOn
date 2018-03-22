@@ -133,3 +133,21 @@ Note that under the Kafka node's logs path, two partition has been created `test
 test-topic
 ```
 
+- Push a topic within Kafka cluster (containing two Kafka servers) with two partitions and no replication. 
+
+```sh
+./bin/kafka-topics.sh --create --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --topic non-repeat-topic --partitions 2 --replication-factor 1
+
+Created topic "non-repeat-topic".
+```
+
+You will observe below.
+
+On Kafka node #1:
+
+<img width="866" alt="screen shot 2018-03-22 at 7 02 30 pm" src="https://media.github.ibm.com/user/54527/files/e0fbd118-2e03-11e8-8194-859c4c23ca3f">
+
+On Kafka node #2:
+
+<img width="890" alt="screen shot 2018-03-22 at 7 02 45 pm" src="https://media.github.ibm.com/user/54527/files/e0da810c-2e03-11e8-9897-fb168af0496c">
+
