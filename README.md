@@ -122,7 +122,7 @@ nohup bin/kafka-server-start.sh config/server.properties &
 
 ## Testing
 
-- *Get the list of active brokers* 
+### Get the list of active brokers
 
 ```sh
 ./bin/zookeeper-shell.sh 9.30.42.237:2181 <<< "ls /brokers/ids"
@@ -131,7 +131,9 @@ nohup bin/kafka-server-start.sh config/server.properties &
 <img width="1148" alt="screen shot 2018-03-23 at 3 03 16 pm" src="https://media.github.ibm.com/user/54527/files/7f692eac-2eab-11e8-959b-864f57cd6988">
 
 
-- *Push a topic* within Kafka cluster (containing two Kafka servers) with two partitions and replicate partition over two Kafka broker. 
+### Push a topic with replica
+
+Push a topic within Kafka cluster (containing two Kafka servers) with two partitions and replicate partition over two Kafka broker. 
 
 ```sh
 ./bin/kafka-topics.sh --create --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --topic test-topic --partitions 2 --replication-factor 2
@@ -143,7 +145,9 @@ Note that under the Kafka node's logs path, two partition has been created `test
 
 <img width="1002" alt="screen shot 2018-03-22 at 6 52 12 pm" src="https://media.github.ibm.com/user/54527/files/5875587e-2e02-11e8-8a2d-d1c148385728">
 
-- *Push a topic* within Kafka cluster (containing two Kafka servers) with two partitions and no replication. 
+### Push a topic without replica
+
+Push a topic within Kafka cluster (containing two Kafka servers) with two partitions and no replication. 
 
 ```sh
 ./bin/kafka-topics.sh --create --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --topic non-repeat-topic --partitions 2 --replication-factor 1
@@ -162,7 +166,9 @@ On Kafka node #2:
 <img width="890" alt="screen shot 2018-03-22 at 7 02 45 pm" src="https://media.github.ibm.com/user/54527/files/e0da810c-2e03-11e8-9897-fb168af0496c">
 
 
-- *Get the list of topics* on Kafka cluster.
+### Get the list of topics
+
+Get the list of topics on Kafka cluster.
 
 ```sh
 ./bin/kafka-topics.sh --list --zookeeper 9.30.42.237:2181 9.30.118.10:2181
@@ -171,7 +177,9 @@ test-topic
 non-repeat-topic
 ```
 
-- *Describe `test-topic`* and `non-repeat-topic` topics.
+### Describe topic 
+
+Describe `test-topic` and `non-repeat-topic` topics.
 
 ```sh
 ./bin/kafka-topics.sh --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --describe --topic test-topic
@@ -187,7 +195,9 @@ Topic: test-topic	Partition: 0	Leader: 1	Replicas: 1,0	Isr: 1
 
 represents Kafka broker with id `0` acting as leader and handling all reads/writes for partition `0`. `Replicas: 1,0` meaning partition `0` is replicated on broker id 0 and 1.   
 
-- *Delete topic* `test-topic` from Kafka cluster.
+### Delete topic 
+
+Delete topic `test-topic` from Kafka cluster.
 
 To enable deletion, we need to make sure to add `delete.topic.enable=true` on all Kafka brokers `server.properties` config file.
 
@@ -195,23 +205,56 @@ To enable deletion, we need to make sure to add `delete.topic.enable=true` on al
 ./bin/kafka-topics.sh --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --delete --topic test-topic
 ```
 
-- *Run a producer* process to publish data into `test-topic` Kafka topic within the Kafka broker.
+### Run a producer
+
+Run a producer process to publish data into `test-topic` Kafka topic within the Kafka broker.
 
 ```sh
 bin/kafka-console-producer.sh --broker-list  9.30.118.212:9092,9.30.214.93:9092 --topic test-topic
 >
 ```
 
-- *Create two consumer groups*. Edit `/kafka_2.11-1.0.1/config/consumer.properties` with group id `test-consumer-group-0` and `test-consumer-group-1` by creating another `consumer.properties1` config.
+### Create two consumer groups 
+
+Edit `/kafka_2.11-1.0.1/config/consumer.properties` with group id `test-consumer-group-0` and `test-consumer-group-1` by creating another `consumer.properties1` config.
 
 ```sh
 # consumer group id
 group.id=test-consumer-group-1
 ```
 
+### Run a consumer process
+
+Run a consumer process to process published data from a topic.
+
 ```sh
-bin/kafka-console-consumer.sh --bootstrap-server 9.30.118.212:9092 --topic test-topic --new-consumer --consumer.config config/consumer.properties
+bin/kafka-console-consumer.sh --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --from-beginning --topic topic-new
 ```
+
+### Run multiple consumer processes
+
+First, run a producer process for pushing data to a `topic-new` topic.
+
+```sh
+bin/kafka-console-producer.sh --broker-list  9.30.118.212:9092,9.30.214.93:9092 --topic topic-new
+```
+
+Run two consumer processes in a consumer group.
+
+```sh
+bin/kafka-console-consumer.sh --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --topic topic-new --consumer.config config/consumer.properties
+```
+
+Let's add messages in producer console as below:
+
+<img width="1154" alt="screen shot 2018-03-23 at 5 23 59 pm" src="https://media.github.ibm.com/user/54527/files/07dce2ca-2ebf-11e8-801b-e51faeec6215">
+
+This is how consumer processes would process messages through Kafka cluster.
+
+<img width="1151" alt="screen shot 2018-03-23 at 5 24 43 pm" src="https://media.github.ibm.com/user/54527/files/4c2be110-2ebf-11e8-86f3-b821ee951b31">
+
+<img width="1158" alt="screen shot 2018-03-23 at 5 24 55 pm" src="https://media.github.ibm.com/user/54527/files/537e6b22-2ebf-11e8-802e-939d8ae2ffeb">
+
 
 
 ## Observation
