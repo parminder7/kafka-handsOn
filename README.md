@@ -9,7 +9,17 @@
 	- [Step #3: Configure Kafka nodes](https://github.com/parminder7/kafka-sample#step-3-configure-kafka-nodes)
 	- [Step #4: Configure Kafka Zookeeper node](https://github.com/parminder7/kafka-sample#step-4-configure-kafka-zookeeper-nodes)
 	
-- [Testing]()
+- [Testing](https://github.com/parminder7/kafka-sample/blob/master/README.md#testing)
+	- [Get the list of active brokers](https://github.com/parminder7/kafka-sample/blob/master/README.md#get-the-list-of-active-brokers)
+	- [Push a topic with replica](https://github.com/parminder7/kafka-sample/blob/master/README.md#push-a-topic-with-replica)
+	- [Push a topic without replica](https://github.com/parminder7/kafka-sample/blob/master/README.md#push-a-topic-without-replica)
+	- [Get list of topics](https://github.com/parminder7/kafka-sample/blob/master/README.md#get-the-list-of-topics)
+	- [Describe topic](https://github.com/parminder7/kafka-sample/blob/master/README.md#describe-topic)
+	- [Delete topic](https://github.com/parminder7/kafka-sample/blob/master/README.md#delete-topic)
+	- [Run a producer](https://github.com/parminder7/kafka-sample/blob/master/README.md#run-a-producer)
+	- [Create a new consumer group](https://github.com/parminder7/kafka-sample/blob/master/README.md#create-two-consumer-groups)
+	- [Run a consumer](https://github.com/parminder7/kafka-sample/blob/master/README.md#run-a-consumer-process)
+	- [Run multiple consumers](https://github.com/parminder7/kafka-sample/blob/master/README.md#run-multiple-consumer-processes)
 
 
 
