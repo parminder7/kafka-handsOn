@@ -212,3 +212,10 @@ group.id=test-consumer-group-1
 ```sh
 bin/kafka-console-consumer.sh --bootstrap-server 9.30.118.212:9092 --topic test-topic --new-consumer --consumer.config config/consumer.properties
 ```
+
+
+## Observation
+
+- What happens if all the Kafka brokers died?
+
+The consumer pulling data from topic gets `Error while fetching metadata with correlation id 43 : {test-topic=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)` error.
