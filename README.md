@@ -170,3 +170,14 @@ represents Kafka broker with id `0` acting as leader and handling all reads/writ
 bin/kafka-console-producer.sh --broker-list  9.30.118.212:9092,9.30.214.93:9092 --topic test-topic
 >
 ```
+
+- Create two consumer groups. Edit `/kafka_2.11-1.0.1/config/consumer.properties` with group id `test-consumer-group-0` and `test-consumer-group-1` by creating another `consumer.properties1` config.
+
+```sh
+# consumer group id
+group.id=test-consumer-group-1
+```
+
+```sh
+bin/kafka-console-consumer.sh --bootstrap-server 9.30.118.212:9092 --topic test-topic --new-consumer --consumer.config config/consumer.properties
+```
