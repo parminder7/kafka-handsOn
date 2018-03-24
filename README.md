@@ -20,6 +20,7 @@
 	- [Create a new consumer group](https://github.com/parminder7/kafka-sample/blob/master/README.md#create-two-consumer-groups)
 	- [Run a consumer](https://github.com/parminder7/kafka-sample/blob/master/README.md#run-a-consumer-process)
 	- [Run multiple consumers](https://github.com/parminder7/kafka-sample/blob/master/README.md#run-multiple-consumer-processes)
+	- [Run multiple consumer groups]()
 
 
 
@@ -265,10 +266,49 @@ This is how consumer processes would process messages through Kafka cluster.
 
 <img width="1158" alt="screen shot 2018-03-23 at 5 24 55 pm" src="https://media.github.ibm.com/user/54527/files/537e6b22-2ebf-11e8-802e-939d8ae2ffeb">
 
+**Note**:
+
+Each consumer in a consumer group is guaranteed to read a particular message by only one consumer in the group. In other words, data pushed to a Kafka topic is only processed once in a consumer group. Or we can say, the processing of data is distributed among consumer processes in a consumer group. 
+
+### Run multiple consumer processes
+
+First, run a producer process for pushing data to a `topic-new` topic.
+
+```sh
+bin/kafka-console-producer.sh --broker-list  9.30.118.212:9092,9.30.214.93:9092 --topic cast-topic
+```
+
+Run two consumer processes in two seperate consumer groups. We need two `consumer-properties` config files as covered [above](https://github.com/parminder7/kafka-sample/blob/master/README.md#create-two-consumer-groups).
+
+```sh
+bin/kafka-console-consumer.sh --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --topic cast-topic --consumer.config config/consumer.properties
+```
+
+```sh
+bin/kafka-console-consumer.sh --zookeeper 9.30.42.237:2181 9.30.118.10:2181 --topic cast-topic --consumer.config config/consumer.properties1
+```
+
+Now, put `[one, two, three, four, five, six]` messages in `cast-topic` through producer process. Following is how consumer processes would receive messages.
+
+<img width="1153" alt="screen shot 2018-03-23 at 8 26 37 pm" src="https://media.github.ibm.com/user/54527/files/ebbe20d0-2ed8-11e8-84fa-0940d22e0dba">
+
+<img width="1150" alt="screen shot 2018-03-23 at 8 26 30 pm" src="https://media.github.ibm.com/user/54527/files/ec0cdd06-2ed8-11e8-8343-f1f684cf01e3">
+
+**Note**:
+
+Here, consumers from different consumer group receive all the messages on a Kafka topic. Meaning, if multiple consumer groups subscribe to a topic, then Kafka would broadcast messages to each of them.
 
 
 ## Observation
 
+- As we have seen during testing
+
 - What happens if all the Kafka brokers died?
 
 The consumer pulling data from topic gets `Error while fetching metadata with correlation id 43 : {test-topic=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)` error.
+
+## Summary
+
+Kafka is a publish-subscribe based messaging system that can be used to exchange data between processes, application and services. It has build-in partitioning, replication and fault-tolerance.
+
+As we have already seen above, Kafka has capability to *scale-processing* (by distributing the data processing among consumer processes in a consumer group) and *multi-subscriber*  (by broadcasting messages among consumer groups).
