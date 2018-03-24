@@ -20,7 +20,7 @@
 	- [Create a new consumer group](https://github.com/parminder7/kafka-sample/blob/master/README.md#create-two-consumer-groups)
 	- [Run a consumer](https://github.com/parminder7/kafka-sample/blob/master/README.md#run-a-consumer-process)
 	- [Run multiple consumers](https://github.com/parminder7/kafka-sample/blob/master/README.md#run-multiple-consumer-processes)
-	- [Run multiple consumer groups]()
+	- [Run multiple consumer groups](https://github.com/parminder7/kafka-sample/blob/master/README.md#run-multiple-consumer-groups)
 
 
 
@@ -270,9 +270,9 @@ This is how consumer processes would process messages through Kafka cluster.
 
 Each consumer in a consumer group is guaranteed to read a particular message by only one consumer in the group. In other words, data pushed to a Kafka topic is only processed once in a consumer group. Or we can say, the processing of data is distributed among consumer processes in a consumer group. 
 
-### Run multiple consumer processes
+### Run multiple consumer groups
 
-First, run a producer process for pushing data to a `topic-new` topic.
+First, run a producer process for pushing data to a `cast-topic` topic.
 
 ```sh
 bin/kafka-console-producer.sh --broker-list  9.30.118.212:9092,9.30.214.93:9092 --topic cast-topic
