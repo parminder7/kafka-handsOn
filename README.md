@@ -301,8 +301,6 @@ Here, consumers from different consumer group receive all the messages on a Kafk
 
 ## Observation
 
-- As we have seen during testing
-
 - What happens if all the Kafka brokers died?
 
 The consumer pulling data from topic gets `Error while fetching metadata with correlation id 43 : {test-topic=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)` error.
